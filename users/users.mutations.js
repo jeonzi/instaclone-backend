@@ -14,38 +14,43 @@ export default {
 			 * 2. hash password
 			 * 3. save and return new user
 			 */
+			try {
+				// check username or email on DB(using prismaClient filter)
+				const exsitingUser = await client.user.findFirst({
+					where: {
+						OR: [
+							{
+								username, // username: username의 축약형
+							},
+							{
+								email,
+							},
+						],
+					},
+				});
+				// console.log(exsitingUser);
 
-			// check username or email on DB(using prismaClient filter)
-			const exsitingUser = await client.user.findFirst({
-				where: {
-					OR: [
-						{
-							username, // username: username의 축약형
-						},
-						{
-							email,
-						},
-					],
-				},
-			});
+				if (exsitingUser) {
+					throw new Error("This username/email is already taken :(");
+				}
 
-			console.log(exsitingUser);
+				// hashing password (using bcyrpt)
+				const hashingPassword = await bcrypt.hash(password, 10);
 
-			// hashing password (using bcyrpt)
-			const hashingPassword = await bcrypt.hash(password, 10);
-
-			// save new user and return
-			const user = await client.user.create({
-				data: {
-					firstName,
-					lastName,
-					username,
-					email,
-					password: hashingPassword,
-				},
-			});
-
-			return user;
+				// save new user and return
+				const user = await client.user.create({
+					data: {
+						firstName,
+						lastName,
+						username,
+						email,
+						password: hashingPassword,
+					},
+				});
+				return user;
+			} catch (e) {
+				return e;
+			}
 		},
 	},
 };
