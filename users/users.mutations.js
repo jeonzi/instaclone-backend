@@ -1,4 +1,5 @@
 import client from "../client";
+import bcrypt from "bcrypt";
 
 export default {
 	Mutation: {
@@ -14,7 +15,7 @@ export default {
 			 * 3. save and return new user
 			 */
 
-			// check username or email on DB
+			// check username or email on DB(using prismaClient filter)
 			const exsitingUser = await client.user.findFirst({
 				where: {
 					OR: [
@@ -27,7 +28,24 @@ export default {
 					],
 				},
 			});
+
 			console.log(exsitingUser);
+
+			// hashing password (using bcyrpt)
+			const hashingPassword = await bcrypt.hash(password, 10);
+
+			// save new user and return
+			const user = await client.user.create({
+				data: {
+					firstName,
+					lastName,
+					username,
+					email,
+					password: hashingPassword,
+				},
+			});
+
+			return user;
 		},
 	},
 };
