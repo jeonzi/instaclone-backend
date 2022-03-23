@@ -14,6 +14,11 @@ export default gql`
 		createdAt: String!
 		updatedAt: String!
 	}
+	type LoginResult {
+		ok: Boolean!
+		token: String
+		error: String
+	}
 
 	type Query {
 		seeProfile(username: String): User
@@ -27,5 +32,7 @@ export default gql`
 			email: String!
 			password: String!
 		): User
+
+		login(username: String!, password: String!): LoginResult!
 	}
 `;
