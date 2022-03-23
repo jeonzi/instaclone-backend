@@ -1,6 +1,6 @@
 import client from "../client";
 import bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 export default {
 	Mutation: {
@@ -60,10 +60,10 @@ export default {
 
 			// check password with args.password
 			const chkPassword = await bcrypt.compare(password, user.password);
-			if(!chkPassword){
+			if (!chkPassword) {
 				return {
 					ok: false,
-					error: "Please check your password 🙏🏻"
+					error: "Please check your password 🙏🏻",
 				};
 			}
 
@@ -72,8 +72,8 @@ export default {
 			const token = await jwt.sign({ id: user.id }, process.env.SECRET_KEY);
 			return {
 				ok: true,
-				token
-			}
+				token,
+			};
 		},
 	},
 };
