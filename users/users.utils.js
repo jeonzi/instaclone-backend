@@ -18,7 +18,7 @@ export const getUser = async (token) => {
 	}
 };
 
-// 로그인한 유저가 아닌 경우에 대비해 resolver를 보호해야함.
+// 로그인한 유저가 아닌 경우에 대비해 resolver를 보호해야함. (여러 resolver 안에서 각각 user 인증하는 하드코딩을 방지)
 export const protectResolver = (user) => {
 	if (!user) {
 		return {
@@ -27,3 +27,17 @@ export const protectResolver = (user) => {
 		};
 	}
 };
+
+// currying
+// 함수 리턴값으로 함수를 호출하는 것
+// protectResolver에서 graphql resolver 를 부르는 것
+export const protectedResolver =
+	(ourResolver) => (root, args, context, info) => {
+		if (!context.loggedInUser) {
+			return {
+				ok: false,
+				error: "Pleas login to perform this action🙏🏻",
+			};
+		}
+		return ourResolver(root, args, context, info);
+	};
