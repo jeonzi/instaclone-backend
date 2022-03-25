@@ -6,10 +6,11 @@ export default {
 		editProfile: async (
 			_,
 			{ firstName, lastName, username, email, password: newPassword },
-			{ loggedInUser } // context의  req.headers.token에서 받아오는 것
+			{ loggedInUser, protectResolver } // context에서 오는 것
 		) => {
-			// 사용자가 mutation과 query에 매번 token을 보내는 것은 좋지 않다. -> 토큰을 자동으로 보내주자 -> HTTP HEADERS에 넣어서
-			console.log(loggedInUser);
+			// 로그인한 사용자가 아닌 경우
+			protectResolver(loggedInUser);
+
 			let uglyPassword = null;
 			if (newPassword) {
 				uglyPassword = await bcrypt.hash(newPassword, 10);

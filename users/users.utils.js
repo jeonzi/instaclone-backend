@@ -17,3 +17,13 @@ export const getUser = async (token) => {
 		return null;
 	}
 };
+
+// 로그인한 유저가 아닌 경우에 대비해 resolver를 보호해야함.
+export const protectResolver = (user) => {
+	if (!user) {
+		return {
+			ok: false,
+			error: "You need to login",
+		};
+	}
+};

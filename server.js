@@ -9,10 +9,11 @@ import { ApolloServer } from "apollo-server";
 // ApolloServerPluginLandingPageGraphQLPlayground 해당코드가 없으면 server.js 를 실행하면 Playground가 아니라 apollo sandbox로 이동(apollo sever 3)
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import schema from "./schema";
-import { getUser } from "./users/users.utils";
+import { getUser, protectResolver } from "./users/users.utils";
 
 const PORT = process.env.DEV_PORT;
 
+// 사용자가 mutation과 query에 매번 token을 보내는 것은 좋지 않다. -> 토큰을 자동으로 보내주자 -> HTTP HEADERS에 넣어서
 // context는 모든 resolver에서 접근 가능한 정보를 넣을 수 있는 object이다.
 // context는 function이 될 수도 있다.
 const server = new ApolloServer({
@@ -21,6 +22,7 @@ const server = new ApolloServer({
 	context: async ({ req }) => {
 		return {
 			loggedInUser: await getUser(req.headers.token),
+			protectResolver,
 		};
 	},
 	plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
