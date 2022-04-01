@@ -2,7 +2,7 @@ import client from "../../client";
 
 export default {
 	Query: {
-		seeProfile: (_, { username }) =>
+		seeProfile: (_, { username }, context, info) =>
 			client.user.findUnique({
 				where: {
 					username,
