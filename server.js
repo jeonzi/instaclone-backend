@@ -12,7 +12,6 @@ import express from "express";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { typeDefs, resolvers } from "./schema";
 import { getUser, protectedResolver } from "./users/users.utils";
-import { compareSync } from "bcrypt";
 
 const PORT = process.env.DEV_PORT;
 
@@ -40,7 +39,7 @@ const startServer = async () => {
 	server.applyMiddleware({ app });
 	await new Promise((func) => app.listen({ port: PORT }, func));
 	console.log(
-		`ApolloServer is running on http://localhost:${PORT}${server.graphqlPath}/`
+		`🚀ApolloServer is running on http://localhost:${PORT}${server.graphqlPath}/`
 	);
 };
 
