@@ -9,8 +9,9 @@ Instagram Backend (Nomadcoder InstaClone)
 -  [x] Create Account
 -  [x] See Profile
 -  [x] Login
--  [ ] Edit Profile
--  [ ] Follow/Unfollow User
+-  [x] Edit Profile
+-  [ ] Follow User
+-  [ ] Unfollow User
 -  [ ] Change Avatar(Image Upload)
 -  [ ] Search Users
 -  [ ] See Follwers

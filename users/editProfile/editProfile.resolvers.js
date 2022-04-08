@@ -1,15 +1,13 @@
 import bcrypt from "bcrypt";
+import { GraphQLUpload } from "graphql-upload";
 import client from "../../client";
 import { protectedResolver } from "../users.utils";
 
 const resolverFn = async (
 	_,
-	{ firstName, lastName, username, email, password: newPassword },
+	{ firstName, lastName, username, email, password: newPassword, bio },
 	{ loggedInUser } // context 에서 오는 것
 ) => {
-	// 로그인한 사용자가 아닌 경우
-	protectResolver(loggedInUser);
-
 	let uglyPassword = null;
 	if (newPassword) {
 		uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -23,6 +21,7 @@ const resolverFn = async (
 			username,
 			email,
 			...(uglyPassword && { password: uglyPassword }), // hashPassword true -> password: hashPassword(es6문법)
+			bio,
 		},
 	});
 
@@ -39,6 +38,7 @@ const resolverFn = async (
 };
 
 export default {
+	Upload: GraphQLUpload,
 	Mutation: {
 		editProfile: protectedResolver(resolverFn),
 	},
