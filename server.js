@@ -8,7 +8,7 @@ require("dotenv").config();
 import { ApolloServer } from "apollo-server-express";
 import { graphqlUploadExpress } from "graphql-upload";
 import express from "express";
-// ApolloServerPluginLandingPageGraphQLPlayground 해당코드가 없으면 server.js 를 실행하면 Playground가 아니라 apollo sandbox로 이동(apollo sever 3)
+import looger from "morgan";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { typeDefs, resolvers } from "./schema";
 import { getUser, protectedResolver } from "./users/users.utils";
@@ -19,8 +19,8 @@ const PORT = process.env.DEV_PORT;
 // context는 모든 resolver에서 접근 가능한 정보를 넣을 수 있는 object이다.
 // context는 function이 될 수도 있다.
 
-const startServer = async () => {
-	const server = new ApolloServer({
+const startServer = async (typeDefs, resolvers) => {
+	const apollo = new ApolloServer({
 		resolvers,
 		typeDefs,
 		// context가 token을 받는게 아니라 utils의 user를 받게 설정해준다.
@@ -33,14 +33,16 @@ const startServer = async () => {
 		plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 	});
 
-	await server.start();
+	await apollo.start();
 	const app = express();
+	app.use(looger("tiny"));
+	app.use("/static", express.static("uploads"));
 	app.use(graphqlUploadExpress());
-	server.applyMiddleware({ app });
+	apollo.applyMiddleware({ app });
 	await new Promise((func) => app.listen({ port: PORT }, func));
 	console.log(
-		`🚀ApolloServer is running on http://localhost:${PORT}${server.graphqlPath}/`
+		`🚀ApolloServer is running on http://localhost:${PORT}${apollo.graphqlPath}`
 	);
 };
 
-startServer();
+startServer(typeDefs, resolvers);
