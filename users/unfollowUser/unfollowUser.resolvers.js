@@ -3,26 +3,26 @@ import { protectedResolver } from "../users.utils";
 
 export default {
 	Mutation: {
-		followUser: protectedResolver(
+		unfollowUser: protectedResolver(
 			async (_, { username }, { loggedInUser }) => {
 				const exsitingUser = await client.user.findUnique({
 					where: { username },
 				});
-
 				if (!exsitingUser) {
 					return {
 						ok: false,
-						error: "That user does not exsit. Can't follow",
+						error: "Cannot unfollow user.",
 					};
 				}
+
 				await client.user.update({
 					where: {
 						id: loggedInUser.id,
 					},
 					data: {
 						following: {
-							connect: {
-								//unique 한 속성이어야 함
+							// 절대 follower를 직접 바꾸지 않는다!!
+							disconnect: {
 								username,
 							},
 						},
