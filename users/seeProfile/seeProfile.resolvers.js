@@ -7,6 +7,11 @@ export default {
 				where: {
 					username,
 				},
+				include: {
+					// prisma client가 반환하는 결과에 사용자가 원하는 relation을 보여줌
+					following: true,
+					followers: true,
+				},
 			}),
 	},
 };
