@@ -26,13 +26,13 @@ export default {
 					take: 5,
 					skip: (page - 1) * 5,
 				});
-			const totalFollwers = await client.user.count({
+			const totalFollowers = await client.user.count({
 				where: { following: { some: { username } } },
 			});
 			return {
 				ok: true,
 				followers,
-				totalPages: Math.ceil(totalFollwers / 5),
+				totalPages: Math.ceil(totalFollowers / 5),
 			};
 		},
 	},
