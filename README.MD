@@ -15,8 +15,8 @@ Instagram Backend (Nomadcoder InstaClone)
 -  [x] Unfollow User
 -  [x] See Followers with Offset Pagination
 -  [x] See Following with Cursor Pagination
--  [ ] Computed Fields
--  [ ] Search Users
+-  [x] Computed Fields
+-  [x] Search Users
 
 ## Photos
 
