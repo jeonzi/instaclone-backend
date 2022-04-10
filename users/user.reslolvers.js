@@ -38,5 +38,29 @@ export default {
 
 			return id === loggedInUser.id;
 		},
+		isFollowing: async ({ id }, _, { loggedInUser }) => {
+			if (!loggedInUser) {
+				return false;
+			}
+			// const exsits = await client.user
+			// 	.findUnique({
+			// 		where: {
+			// 			username: loggedInUser.username,
+			// 		},
+			// 	})
+			// 	.following({ where: { id } });
+			// return exsits.length !== 0;
+			const exsits = await client.user.count({
+				where: {
+					username: loggedInUser.username,
+					following: {
+						some: {
+							id,
+						},
+					},
+				},
+			});
+			return Boolean(exsits);
+		},
 	},
 };
