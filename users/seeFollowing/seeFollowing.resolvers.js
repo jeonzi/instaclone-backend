@@ -1,8 +1,6 @@
-import client from "../../client";
-
 export default {
 	Query: {
-		seeFollowers: async (_, { username, page }) => {
+		seeFollowing: async (_, { username, lastId }) => {
 			const exsitingUser = await client.user.findUnique({
 				where: { username },
 				select: { id }, // select: 원하는 특정 필드만 가져오는 기능(최소 하나는 넣어줘야 함)
@@ -13,10 +11,11 @@ export default {
 					error: "User not found",
 				};
 			}
-			/** Offset Pagination
-			 *  특정 페이지로 건너뛰기 및 가져오기에 유용, 규모가 커지면 감당하기 힘들어짐
+			/** Cursor pagination
+			 * 규모 확장하기가 쉬워짐, 편하지만 특정 페이지로 이동이 불가, 무한스크롤에 적합
+			 * cursor : 데이터베이스에 보내는 우리가 본 마지막 데이터 (lastId)
 			 */
-			const followers = await client.user
+			const following = await client.user
 				.findUnique({
 					where: {
 						username,
@@ -24,15 +23,12 @@ export default {
 				})
 				.followers({
 					take: 5,
-					skip: (page - 1) * 5,
+					skip: lastId ? 1 : 0,
+					...(lastId && { cursor: { id: lastId } }),
 				});
-			const totalFollwers = await client.user.count({
-				where: { following: { some: { username } } },
-			});
 			return {
 				ok: true,
-				followers,
-				totalPages: Math.ceil(totalFollwers / 5),
+				following,
 			};
 		},
 	},
