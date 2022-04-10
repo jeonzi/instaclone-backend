@@ -13,8 +13,8 @@ Instagram Backend (Nomadcoder InstaClone)
 -  [x] Change Avatar(Image Upload)
 -  [x] Follow User
 -  [x] Unfollow User
--  [x] See Followers
--  [x] See Following
+-  [ ] See Followers and See Following with Pagination
+-  [ ] Computed Fields
 -  [ ] Search Users
 
 ## Photos
