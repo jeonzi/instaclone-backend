@@ -20,7 +20,7 @@ Instagram Backend (Nomadcoder InstaClone)
 
 ## Photos
 
--  [ ] Upload Photo (Parse #)
+-  [x] Upload Photo (Parse #)
 -  [ ] See Photo
 -  [ ] See Hashtags
 -  [ ] Search Photos
