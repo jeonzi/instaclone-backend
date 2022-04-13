@@ -44,7 +44,11 @@ export default {
 						password: hashingPassword,
 					},
 				});
-				return user;
+				if (user) {
+					return {
+						ok: true,
+					};
+				}
 			} catch (e) {
 				return e;
 			}

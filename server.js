@@ -7,6 +7,7 @@
 require("dotenv").config();
 import { ApolloServer } from "apollo-server-express";
 import { graphqlUploadExpress } from "graphql-upload";
+import cors from "cors";
 import express from "express";
 import looger from "morgan";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
@@ -37,6 +38,7 @@ const startServer = async (typeDefs, resolvers) => {
 	const app = express();
 	app.use(looger("tiny"));
 	app.use("/static", express.static("uploads"));
+	app.use(cors());
 	app.use(graphqlUploadExpress());
 	apollo.applyMiddleware({ app });
 	await new Promise((func) => app.listen({ port: PORT }, func));
