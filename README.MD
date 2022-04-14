@@ -1,10 +1,8 @@
 # NomadCoder Instagram Clone
 
-# Instaclone
+## Instagram Backend (Nomadcoder InstaClone)
 
-Instagram Backend (Nomadcoder InstaClone)
-
-## User
+### User
 
 -  [x] Create Account
 -  [x] See Profile
@@ -18,18 +16,18 @@ Instagram Backend (Nomadcoder InstaClone)
 -  [x] Computed Fields
 -  [x] Search Users
 
-## Photos
+### Photos
 
 -  [x] Upload Photo (Parse #)
 -  [x] See Photo
--  [ ] See Hashtags
--  [ ] Search Photos
--  [ ] Edit Photo
+-  [x] See Hashtags
+-  [x] Search Photos
+-  [x] Edit Photo
 -  [ ] Like / Unlike Photo
 -  [ ] See Photo Likes
 -  [ ] See Feed
 
-## Comments
+### Comments
 
 -  [ ] Comment on Photo
 -  [ ] Edit Comment
