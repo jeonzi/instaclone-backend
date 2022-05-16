@@ -1,4 +1,3 @@
-import { argsToArgsConfig } from "graphql/type/definition";
 import client from "../client";
 
 export default {
@@ -17,9 +16,10 @@ export default {
 					},
 				},
 			}),
+		likeNum: ({ id }) => client.like.count({ where: { photoId: id } }),
 	},
 	Hashtag: {
-		photos: ({ id }, { page }) => {
+		photos: ({ id }, { page }, { loggedInUser }) => {
 			return client.hashtag
 				.findUnique({
 					where: {
