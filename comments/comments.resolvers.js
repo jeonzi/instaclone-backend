@@ -5,7 +5,7 @@ export default {
 			if (!loggedInUser) {
 				return false;
 			}
-			return userId === loggedInUser;
+			return userId === loggedInUser.id;
 		},
 	},
 };
