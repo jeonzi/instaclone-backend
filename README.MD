@@ -26,14 +26,14 @@
 -  [x] Like / Unlike Photo
 -  [x] See Photo Likes
 -  [x] See Feed
--  [ ] See Photo Comments
--  [ ] Is Mine(Delete Photo)
+-  [x] See Photo Comments
+-  [ ] Delete Photo
 
 ### Comments
 
 -  [x] Comment on Photo
 -  [ ] Edit Comment
--  [ ] Delete Comment(isMine)
+-  [ ] Delete Comment
 
 ### Extras
 
