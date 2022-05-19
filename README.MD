@@ -38,7 +38,7 @@
 ### Refactor
 
 -  [x] Mutation Responses
--  [ ] ProtectedResolver
+-  [x] ProtectedResolver
 
 ### Extras
 
