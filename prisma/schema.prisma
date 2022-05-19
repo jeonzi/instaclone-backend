@@ -12,21 +12,23 @@ datasource db {
 
 // model을 변경할 때 마다 migrate해주어야 함(npm run migrate)
 model User {
-  id        Int       @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
   firstName String
   lastName  String? // ? : not required
-  username  String    @unique
-  email     String    @unique
+  username  String     @unique
+  email     String     @unique
   password  String
   bio       String?
   avatarURL String?
   photos    Photo[]
   likes     Like[]
-  followers User[]    @relation("FollowRelation", references: [id])
-  following User[]    @relation("FollowRelation", references: [id])
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  followers User[]     @relation("FollowRelation", references: [id])
+  following User[]     @relation("FollowRelation", references: [id])
   comments  Comment[]
+  chatRooms ChatRoom[]
+  message   Message[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 model Photo {
@@ -71,4 +73,23 @@ model Comment {
   photoId   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ChatRoom {
+  id        Int       @id @default(autoincrement())
+  users     User[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  message   Message[]
+}
+
+model Message {
+  id         Int      @id @default(autoincrement())
+  payload    String
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [id])
+  chatRoomId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
