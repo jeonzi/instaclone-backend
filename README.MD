@@ -32,8 +32,13 @@
 ### Comments
 
 -  [x] Comment on Photo
--  [ ] Edit Comment
+-  [x] Edit Comment
 -  [x] Delete Comment
+
+### Refactor
+
+-  [x] Mutation Responses
+-  [ ] ProtectedResolver
 
 ### Extras
 
