@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { GraphQLUpload } from "graphql-upload";
 import client from "../../client";
 import { protectedResolver } from "../users.utils";
+import { uploadPhoto } from "../../shared/shared.utils";
 
 const resolverFn = async (
 	_,
@@ -19,14 +20,16 @@ const resolverFn = async (
 ) => {
 	let avatarUrl = null;
 	if (avatarURL) {
-		const { filename, createReadStream } = await avatarURL;
+		avatarUrl = await uploadToS3(avatarURL, loggedInUser.id, "avatars/");
+
+		/* const { filename, createReadStream } = await avatarURL;
 		const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
 		const readStream = createReadStream();
 		const writeStream = createWriteStream(
 			process.cwd() + "/uploads/" + newFilename
 		); //readStream을 writeStream으로 Pipe로 연결(router가 경로를 읽지 못함...)
 		readStream.pipe(writeStream); // 사진 저장
-		avatarUrl = `http://localhost:4000/static/${newFilename}`;
+		avatarUrl = `http://localhost:4000/static/${newFilename}`; */
 	}
 
 	let uglyPassword = null;
