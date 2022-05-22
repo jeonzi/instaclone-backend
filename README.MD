@@ -49,6 +49,6 @@
 -  [x] See Rooms
 -  [x] Send Message(Create Room)
 -  [x] See Room
--  [ ] Coumputed Fields
--  [ ] See Message
+-  [x] Coumputed Fields
+-  [ ] See (Read) Message
 -  [ ] Realtime Message
