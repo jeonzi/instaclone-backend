@@ -46,6 +46,9 @@
 
 ### Direct Messages
 
+-  [x] See Rooms
+-  [x] Send Message(Create Room)
 -  [x] See Room
--  [ ] Send Message(Create Room)
+-  [ ] Coumputed Fields
+-  [ ] See Message
 -  [ ] Realtime Message
