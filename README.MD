@@ -50,5 +50,9 @@
 -  [x] Send Message(Create Room)
 -  [x] See Room
 -  [x] Coumputed Fields
--  [ ] See (Read) Message
+-  [x] See (Read) Message
 -  [ ] Realtime Message
+
+### Heroku deploy
+
+-  [ ] Server Building

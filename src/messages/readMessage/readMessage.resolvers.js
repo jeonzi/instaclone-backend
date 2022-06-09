@@ -4,7 +4,6 @@ import { protectedResolver } from "../../users/users.utils";
 export default {
 	Mutation: {
 		readMessage: protectedResolver(async (_, { id }, { loggedInUser }) => {
-			// 1. 내가 보낸 메세지가 아닌 걸 확인
 			const message = await client.message.findFirst({
 				where: {
 					id,
@@ -29,7 +28,6 @@ export default {
 					error: "Message not found",
 				};
 			}
-
 			await client.message.update({
 				where: {
 					id,
@@ -38,7 +36,6 @@ export default {
 					read: true,
 				},
 			});
-
 			return {
 				ok: true,
 			};
