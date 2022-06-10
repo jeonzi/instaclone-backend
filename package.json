@@ -33,6 +33,7 @@
 		"bcrypt": "^5.0.1",
 		"dotenv": "^16.0.0",
 		"express": "^4.17.3",
+		"fs-capacitor": "^7.0.1",
 		"graphql": "^16.3.0",
 		"graphql-upload": "^13.0.0",
 		"jsonwebtoken": "^8.5.1",
@@ -45,5 +46,8 @@
 		"@babel/preset-env": "^7.16.11",
 		"nodemon": "^2.0.15",
 		"prisma": "^3.10.0"
+	},
+	"resolutions": {
+		"fs-capacitor": "^7.0.1"
 	}
 }
