@@ -36,7 +36,8 @@
 		"graphql": "^16.3.0",
 		"graphql-upload": "^13.0.0",
 		"jsonwebtoken": "^8.5.1",
-		"morgan": "^1.10.0"
+		"morgan": "^1.10.0",
+		"fs-capacitor": "^6.2.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.17.5",
@@ -45,5 +46,8 @@
 		"@babel/preset-env": "^7.16.11",
 		"nodemon": "^2.0.15",
 		"prisma": "^3.10.0"
+	},
+	"resolutions": {
+		"fs-capacitor": "^6.2.0"
 	}
 }
