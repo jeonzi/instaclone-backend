@@ -2,6 +2,9 @@
 	"name": "nomad-instaclone",
 	"version": "1.0.0",
 	"description": "",
+	"engines": {
+		"node": "16.14.0"
+	},
 	"scripts": {
 		"preinstall": "npx npm-force-resolutions",
 		"start:dev": "nodemon --exec babel-node src/server --delay 2s",
